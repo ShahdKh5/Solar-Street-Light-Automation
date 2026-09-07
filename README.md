@@ -1,2 +1,2 @@
-# Smart_Water_Management_Project
-The Smart Water Management &amp; Leak Detection System is an ATmega32-based embedded system that monitors water levels, detects leaks, and automatically controls a water pump. It also provides LCD monitoring, alarms, and AUTO/MANUAL modes for efficient and safe water management.
+# Solar-Street-Light-Automation
+Smart solar street lighting system using ATmega32 with motion detection and adaptive PWM-based illumination for energy-efficient lighting.
