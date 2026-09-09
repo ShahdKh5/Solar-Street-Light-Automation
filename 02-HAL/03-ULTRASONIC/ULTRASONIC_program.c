@@ -7,6 +7,10 @@ void ULTRASONIC_voidInit(void) {
        1. Configure Trigger pin as OUTPUT.
        2. Configure Echo pin as INPUT.
     */
+    //Trigger -> PD3
+    DIO_voidSetPinDirection(DIO_u8_PORTD, DIO_u8_PIN3, DIO_u8_OUTPUT);
+    //Echo -> PD2
+    DIO_voidSetPinDirection(DIO_u8_PORTD, DIO_u8_PIN2, DIO_u8_INPUT);
 }
 
 void ULTRASONIC_voidTrigger(void) {
