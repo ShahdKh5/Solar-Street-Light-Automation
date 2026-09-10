@@ -3,6 +3,9 @@
 
 #include "../../01-MCAL/00-LIB/STD_TYPES.h"
 
+#define TRIGGER_PIN     DIO_u8_PIN3
+#define ECHO_PIN        DIO_u8_PIN2
+
 /* Initialize the Trigger and Echo pins for the Ultrasonic sensor */
 void ULTRASONIC_voidInit(void);
 

@@ -1,6 +1,7 @@
 #include "../../01-MCAL/00-LIB/STD_TYPES.h"
 #include "../../01-MCAL/01-DIO/DIO_interface.h"
 #include "ULTRASONIC_interface.h"
+#include <delay/util.h>
 
 void ULTRASONIC_voidInit(void) {
     /* TODO: 
@@ -8,9 +9,9 @@ void ULTRASONIC_voidInit(void) {
        2. Configure Echo pin as INPUT.
     */
     //Trigger -> PD3
-    DIO_voidSetPinDirection(DIO_u8_PORTD, DIO_u8_PIN3, DIO_u8_OUTPUT);
+    DIO_voidSetPinDirection(DIO_u8_PORTD, TRIGGER_PIN, DIO_u8_OUTPUT);
     //Echo -> PD2
-    DIO_voidSetPinDirection(DIO_u8_PORTD, DIO_u8_PIN2, DIO_u8_INPUT);
+    DIO_voidSetPinDirection(DIO_u8_PORTD, ECHO_PIN, DIO_u8_INPUT);
 }
 
 void ULTRASONIC_voidTrigger(void) {
@@ -19,6 +20,9 @@ void ULTRASONIC_voidTrigger(void) {
        2. Delay for ~10 microseconds.
        3. Set Trigger pin LOW.
     */
+    DIO_voidSetPinValue(DIO_u8_PORTD, TRIGGER_PIN, DIO_u8_HIGH);
+    _delay_ms(0.01);
+    DIO_voidSetPinValue(DIO_u8_PORTD, TRIGGER_PIN, DIO_u8_LOW);
 }
 
 u16 ULTRASONIC_u16GetDistance(void) {
