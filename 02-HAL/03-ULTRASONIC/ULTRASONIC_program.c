@@ -32,5 +32,23 @@ u16 ULTRASONIC_u16GetDistance(void) {
        3. Calculate distance: Distance (cm) = (Duration * 0.0343) / 2.
        4. Return the calculated distance in cm.
     */
-    return 0;
+    u32 Local_u32Duration = 0;
+    u16 Local_u16Distance_cm = 0;
+
+    //1. Send trigger pulse
+    ULTRASONIC_voidTrigger();
+
+    //2. Wait for ECHO pin to go HIGH
+    while (DIO_u8GetPinValue(DIO_u8_PORTD, ECHO_PIN) == DIO_LOW);
+
+    //3. Count microsecond delays while ECHO pin stays HIGH
+    while (DIO_u8GetPinValue(DIO_u8_PORTD, ECHO_PIN) == DIO_HIGH) {
+        Local_u32Duration++;
+        _delay_us(1); //1us delay per iteration
+    }
+
+    //Local_u32Duration now holds the pulse duration in microseconds
+
+    Local_u16Distance_cm= (u16)((Local_u32Duration * 0.0343) / 2);
+    return Local_u16Distance_cm;
 }
