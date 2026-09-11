@@ -9,9 +9,9 @@ void ULTRASONIC_voidInit(void) {
        2. Configure Echo pin as INPUT.
     */
     //Trigger -> PD3
-    DIO_voidSetPinDirection(DIO_u8_PORTD, TRIGGER_PIN, DIO_u8_OUTPUT);
+    DIO_voidSetPinDirection(TRIGGER_PORT, TRIGGER_PIN, DIO_u8_OUTPUT);
     //Echo -> PD2
-    DIO_voidSetPinDirection(DIO_u8_PORTD, ECHO_PIN, DIO_u8_INPUT);
+    DIO_voidSetPinDirection(ECHO_PORT, ECHO_PIN, DIO_u8_INPUT);
 }
 
 void ULTRASONIC_voidTrigger(void) {
@@ -20,9 +20,9 @@ void ULTRASONIC_voidTrigger(void) {
        2. Delay for ~10 microseconds.
        3. Set Trigger pin LOW.
     */
-    DIO_voidSetPinValue(DIO_u8_PORTD, TRIGGER_PIN, DIO_u8_HIGH);
+    DIO_voidSetPinValue(TRIGGER_PORT, TRIGGER_PIN, DIO_u8_HIGH);
     _delay_ms(0.01);
-    DIO_voidSetPinValue(DIO_u8_PORTD, TRIGGER_PIN, DIO_u8_LOW);
+    DIO_voidSetPinValue(TRIGGER_PORT, TRIGGER_PIN, DIO_u8_LOW);
 }
 
 u16 ULTRASONIC_u16GetDistance(void) {
@@ -39,10 +39,10 @@ u16 ULTRASONIC_u16GetDistance(void) {
     ULTRASONIC_voidTrigger();
 
     //2. Wait for ECHO pin to go HIGH
-    while (DIO_u8GetPinValue(DIO_u8_PORTD, ECHO_PIN) == DIO_LOW);
+    while (DIO_u8GetPinValue(ECHO_PORT, ECHO_PIN) == DIO_LOW);
 
     //3. Count microsecond delays while ECHO pin stays HIGH
-    while (DIO_u8GetPinValue(DIO_u8_PORTD, ECHO_PIN) == DIO_HIGH) {
+    while (DIO_u8GetPinValue(ECHO_PORT, ECHO_PIN) == DIO_HIGH) {
         Local_u32Duration++;
         _delay_us(1); //1us delay per iteration
     }
