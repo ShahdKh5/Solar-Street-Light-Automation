@@ -7,6 +7,8 @@ void LDR_voidInit(void) {
     /* TODO: 
        1. Set the direction of the ADC channel pin connected to LDR as INPUT.
     */
+    //LDR -> PA0
+    DIO_voidSetPinDirection(LDR_PORT, LDR_PIN, DIO_u8_INPUT);
 }
 
 u8 LDR_u8IsNight(void) {
@@ -15,5 +17,8 @@ u8 LDR_u8IsNight(void) {
        2. Compare the result with a threshold (e.g., if reading > 512, it's night).
        3. Return 1 if night, 0 if day.
     */
-    return 0;
+    u16 LDR_reading= ADC_u16ReadSynchronus(ADC_CHANNEL_0);
+    if (LDR_reading > NIGHT_THRESHOLD)
+        return 1;   //Night
+    return 0;       //Day
 }
