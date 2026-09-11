@@ -1,7 +1,7 @@
 #include "../../01-MCAL/00-LIB/STD_TYPES.h"
 #include "../../01-MCAL/01-DIO/DIO_interface.h"
 #include "ULTRASONIC_interface.h"
-#include <delay/util.h>
+#include <util/delay.h>
 
 void ULTRASONIC_voidInit(void) {
     /* TODO: 
@@ -39,10 +39,10 @@ u16 ULTRASONIC_u16GetDistance(void) {
     ULTRASONIC_voidTrigger();
 
     //2. Wait for ECHO pin to go HIGH
-    while (DIO_u8GetPinValue(ECHO_PORT, ECHO_PIN) == DIO_LOW);
+    while (DIO_u8GetPinValue(ECHO_PORT, ECHO_PIN) == DIO_u8_LOW);
 
     //3. Count microsecond delays while ECHO pin stays HIGH
-    while (DIO_u8GetPinValue(ECHO_PORT, ECHO_PIN) == DIO_HIGH) {
+    while (DIO_u8GetPinValue(ECHO_PORT, ECHO_PIN) == DIO_u8_HIGH) {
         Local_u32Duration++;
         _delay_us(1); //1us delay per iteration
     }
