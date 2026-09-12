@@ -3,19 +3,20 @@
 
 #include "../../01-MCAL/00-LIB/STD_TYPES.h"
 
-#define TRIGGER_PORT     DIO_u8_PORTD
-#define ECHO_PORT        DIO_u8_PORTD
-
-#define TRIGGER_PIN     DIO_u8_PIN3
-#define ECHO_PIN        DIO_u8_PIN2
+typedef struct {
+    u8 Trigger_u8_Port;
+    u8 Trigger_u8_Pin;
+    u8 Echo_u8_Port;
+    u8 Echo_u8_Pin;
+} ULTRASONIC_Config_t;
 
 /* Initialize the Trigger and Echo pins for the Ultrasonic sensor */
-void ULTRASONIC_voidInit(void);
+void ULTRASONIC_voidInit(const ULTRASONIC_Config_t *Copy_pstrConfig);
 
 /* Send a trigger pulse to the Ultrasonic sensor */
-void ULTRASONIC_voidTrigger(void);
+void ULTRASONIC_voidTrigger(const ULTRASONIC_Config_t *Copy_pstrConfig);
 
-/* Measure the distance in centimeters using the Ultrasonic sensor */
-u16 ULTRASONIC_u16GetDistance(void);
+/* Measure the distance in centimeters using the Ultrasonic sensor (0 = no echo / out of range)*/
+u16 ULTRASONIC_u16GetDistance(const ULTRASONIC_Config_t *Copy_pstrConfig);
 
 #endif
